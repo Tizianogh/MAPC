@@ -1,0 +1,46 @@
+@startuml classdiagram
+!include ../../../../style/commons.style
+
+package td2{
+
+    interface Systeme {
+        getName(): String
+        getContent(): String
+        getOwner(): Owner
+        getSize(): int
+        getContent(): String
+        appendContent(in content : String): void
+        setOwner (in owner : Owner) void
+    }
+
+    class Owner {
+    -name : String
+    +this(in n  String)
+    +equals()
+    +hashCode()
+    +toString()
+    }
+
+    abstract class SystemeImp implements Systeme{
+      -name: String
+      +this(in name: String, in owner : Owner)
+
+      +getName(): String
+      +getOwner(): Owner
+    }
+
+        class Repertoire {
+            +this()
+        }
+
+        class Fichier  {
+            +this()
+        }
+
+    Repertoire *-->" * elems" Systeme
+    SystemeImp -->"-Owner" Owner
+    Fichier --|> SystemeImp
+    Repertoire --|> SystemeImp
+
+}
+@enduml
